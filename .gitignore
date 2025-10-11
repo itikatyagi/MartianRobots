@@ -1,0 +1,23 @@
+# Build Folders for each project
+MartianRobots/bin/
+MartianRobots/obj/
+MartianRobots.Tests/bin/
+MartianRobots.Tests/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+.git/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
