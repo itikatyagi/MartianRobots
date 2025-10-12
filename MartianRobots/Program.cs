@@ -1,16 +1,21 @@
 ﻿using System;
 using System.IO;
-using MartianRobots.Parsing;
 using MartianRobots.Runner;
+using MartianRobots.Parsing;
+using MartianRobots.Visualization;
 
-class Program
+namespace MartianRobots.RunnerApp
 {
-    static void Main(string[] args)
+    class Program
     {
-        // default: read stdin (extensible). If an input file path is provided, use that.
-        using var reader = args.Length > 0 ? new StreamReader(args[0]) : Console.In;
-        var parser = new SimpleTextParser();
-        var runner = new SimulationRunner(parser, Console.Out);
-        runner.Run(reader);
+        static void Main(string[] args)
+        {
+            var parser = new SimpleTextParser();
+            var visualizer = new AsciiVisualizer(); // optional
+            var runner = new SimulationRunner(parser, Console.Out, visualizer);
+
+            using var reader = args.Length > 0 ? new StreamReader(args[0]) : Console.In;
+            runner.Run(reader);
+        }
     }
 }
