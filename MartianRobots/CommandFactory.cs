@@ -8,13 +8,14 @@ namespace MartianRobots
     {
         public static ICommand Create(char c)
         {
-            return c switch
+            switch (char.ToUpper(c)) // normalize input to uppercase
             {
-                'L' => new TurnLeftCommand(),
-                'R' => new TurnRightCommand(),
-                'F' => new MoveForwardCommand(),
-                _ => throw new InvalidOperationException($"Unknown command '{c}'")
-            };
+                case 'L': return new TurnLeftCommand();
+                case 'R': return new TurnRightCommand();
+                case 'F': return new MoveForwardCommand();
+                default:
+                    throw new ArgumentException($"Unknown command '{c}'");
+            }
         }
     }
 }
