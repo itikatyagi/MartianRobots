@@ -10,12 +10,23 @@ namespace MartianRobots.RunnerApp
     {
         static void Main(string[] args)
         {
+            // Select input: either from a file path argument or Console input
+            using var reader = args.Length > 0
+                ? new StreamReader(args[0])
+                : Console.In;
+
             var parser = new SimpleTextParser();
-            var visualizer = new AsciiVisualizer(); // optional
+            var visualizer = new AsciiVisualizer(); // optional: pass null if you don't want visualization
             var runner = new SimulationRunner(parser, Console.Out, visualizer);
 
-            using var reader = args.Length > 0 ? new StreamReader(args[0]) : Console.In;
-            runner.Run(reader);
+            try
+            {
+                runner.Run(reader);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }
